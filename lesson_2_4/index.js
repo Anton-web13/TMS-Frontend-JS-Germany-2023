@@ -402,8 +402,104 @@ someArray.push("Anton");
 someArray.pop();
 someArray.shift();
 someArray.unshift("qwe");
-
 console.log(someArray);
+
+
+// slice
+const resultSlice = someArray.slice(0,1);
+console.log("First array", someArray);
+console.log("Result", resultSlice);
+
+
+
+// splice
+
+// const resultSplice = someArray.splice(0, 1, 7);
+// const resultSplice = someArray.splice(0, 2);
+const resultSplice = someArray.splice(2, 1, 7,8,9);
+
+console.log("First array:", someArray, "5-letter:", someArray[4]);
+console.log("Result:", resultSplice);
+
+
+console.clear();
+
+
+
+// First variant
+const getCharArrayFirst = function (string) {
+    const result = [];
+
+    for (const char of string) {
+        result.push(char);
+    }
+
+    return result;
+}
+
+
+console.log(getCharArrayFirst("Hello!"));
+
+
+
+
+// Second variant
+const getCharArraySecond = function (string) {
+
+    // return string.split("1");
+    return string.split("/");
+}
+
+
+// console.log(getCharArraySecond("I love JavaScript!"));
+console.log(getCharArraySecond("10/12/2023"));
+
+
+
+
+// JOIN ['10', '12', '2023']
+const datum = ['10', '12', '2023'];
+const getCharArrayJoin = function (string) {
+
+    return datum.join("/");
+}
+
+
+// console.log(getCharArraySecond("I love JavaScript!"));
+console.log(getCharArrayJoin());
+
+console.clear();
+
+
+// Value from array = ['10', '12', '2023']
+const getCharArrayValueFromDate = function () {
+    const datumOf = ['10', '12', '2023'];
+
+    // for (const date in datum) {
+    //     console.log(date);
+    //     console.log(datum[date]);
+    // }
+
+
+    // for (const date of datum) {
+    //     console.log("so kann man noch machen", date);
+    // }
+
+    datumOf.splice(1,1,"Fuck");
+
+    console.log(datumOf)
+
+
+}
+
+
+// console.log(getCharArraySecond("I love JavaScript!"));
+console.log(getCharArrayValueFromDate());
+
+
+
+
+
 
 
 
