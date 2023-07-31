@@ -487,7 +487,7 @@ const getCharArrayValueFromDate = function () {
 
     datumOf.splice(1,1,"Fuck");
 
-    console.log(datumOf)
+    console.log(datumOf);
 
 
 }
