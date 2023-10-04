@@ -152,31 +152,172 @@ console.log(doubleNumbersList2([1,2,3])); // 2,4,6
 // console.log(doubleNumbersList2_alternative([1,2,3])); // 2,4,6
 
 
-
-
-
+console.clear();
 
 // filter
-console.log("w345354")
+// console.log("w345354");
+
+const matrix1 = [[1,2], [2,3], [3,4,5], [6]];
+
+console.log(matrix1[2][0]);
+
+
+console.clear();
+
+
+
+const doubleNumbersList_2 = (numbers) => {
+    // const result = [];
+
+    // for (let i = 0; i < numbers.length; i++) {
+    //     result.push(String(numbers[i]));
+    // }
+
+    return numbers.map((number) => {
+       return number.toString();
+    })
+
+    // return numbers.map(function (number){
+    //     return number.toString();
+    // })
+
+
+}
+
+console.log(doubleNumbersList_2([3,4,5,6,67,78]));
+
+console.clear();
+
+// filter
+
+const method_filter = (numbers) => {
+    if (!Array.isArray(numbers)) {
+        return;
+    }
+
+    return numbers.filter((number) => {
+        return number > 3;
+    });
+
+}
+
+console.log(method_filter([2,3,4,5,6,6]));
+
+// console.clear();
+
+
+// const method_filter_for = (numbers) => {
+//     if (!Array.isArray(numbers)) {
+//         return;
+//     }
+//
+//     const result = [];
+//
+//     // for (let i = 0; i < numbers.length; i++) {
+//     //     if (numbers[i] === 3) {
+//     //         result.push(numbers[i])
+//     //     }
+//     // }
+//
+//     for (const number of numbers) {
+//         if (number > 3) {
+//             result.push(number)
+//         }
+//     }
+//
+//     return result;
+//
+// }
+//
+// console.log(method_filter_for([2,3,4,5,6,6]));
+
+console.clear();
+
+// forEach
+const method_filter_forEach = (numbers) => {
+    if (!Array.isArray(numbers)) {
+        return;
+    }
+
+    const result = [];
+
+    numbers.forEach((number) => {
+        if (number >= 3) {
+            result.push(number);
+        }
+    })
+
+    return result;
+
+}
+
+console.log(method_filter_forEach([2,3,4,5,6,6]));
+
+console.clear();
+
+
+
+
+// find, findIndex
+const usersList = ['Alex', 'Max', 'Vika', 'Anton', 'Petr', 'Alexandra'];
+
+const findNum = (users, userToSearch) => {
+    const foundUser = users.find((user) => {
+        return user.toLowerCase() === userToSearch.toLowerCase();
+    })
+
+    if (foundUser) {
+       return foundUser;
+    }
+
+    return 'User not found'
+}
+
+// console.log(findNum(usersList, 'anton'));
+
+const findIndexUser = (users, userToSearch) => {
+    const foundUserIndex = users.findIndex((user) => {
+        return user.toLowerCase() === userToSearch.toLowerCase();
+    })
+
+    if (foundUserIndex !== -1) {
+        return foundUserIndex;
+    }
+
+    return 'User not found'
+}
+
+console.log(findIndexUser(usersList, 'max'));
 
 
 
 
 
+console.clear();
+
+const usersListTask = ['Alex', 'Max', 'Vika', 'Anton', 'Petr', 'Alexandra'];
 
 
+const findUserTask = (users, letters) => {
 
+    return users.filter((user) => {
+        const firstLetter = user[0].toLowerCase();
+        console.log(firstLetter);
 
+        // letters.forEach((letter) => {
+        //     if (!letters === letter) {
+        //         return user;
+        //     }
+        // });
 
+        if (!letters.includes(firstLetter)) {
+            return user;
+        }
 
+    })
+}
 
-
-
-
-
-
-
-
+console.log(findUserTask(usersListTask, ['m', 'p']));
 
 
 
