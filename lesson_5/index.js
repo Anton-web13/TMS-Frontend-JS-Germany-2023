@@ -327,20 +327,86 @@ console.log(findUserTask(usersListTask, ['m', 'p']));
 
 console.clear();
 
+// 1
 const lettersDown = (array) => {
 
-    array.forEach((value) => {
-        if (value === value.toUpperCase()) {
-            value === value.toLowerCase();
-        }
+    const result = [];
 
-        value === value.toUpperCase();
+    array.forEach((value) => {
+       if (value === value.toUpperCase()) {
+           newValue = value.toLowerCase();
+       } else {
+           newValue = value.toUpperCase();
+       }
+
+       result.push(newValue);
+
+
     })
+
+    return result;
 
 
 }
 
-console.log(lettersDown(['a', 'F', 'g']));
+console.log(lettersDown(['a', 'F', 'g','D', 'J', 'H']));
+
+
+
+
+
+console.clear();
+// 2
+
+
+const arrayOfNumbers = (numbers) => {
+
+    const result = [];
+    // return numbers.map((number, index) => {
+    //     return {
+    //         Value: number,
+    //         Index: index,
+    //         Squared: number * number,
+    //     }
+    // })
+
+    numbers.forEach((number, index) => {
+        return result.push(`Value: ${number}, Index: ${index}, Squared: ${number * number}`);
+    })
+
+    return result;
+}
+
+console.log(arrayOfNumbers([3,4,6]));
+
+
+
+
+console.clear();
+// 3
+
+const lettersNumbers = (value) => {
+
+    // const onlyLetters = [];
+
+    return value.filter((value) => {
+        if (typeof value !== "string") {
+            // return onlyLetters.push(value);
+            return value;
+        }
+    })
+
+    // return numbers.filter((number) => {
+    //     return number > 3;
+    // });
+
+    // return onlyLetters;
+
+}
+
+console.log(lettersNumbers(["Hi", 2, 3, 4, 5, "JS", 2, "C++"]));
+
+
 
 
 
