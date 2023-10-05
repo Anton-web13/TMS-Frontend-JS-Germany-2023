@@ -322,3 +322,28 @@ console.log(findUserTask(usersListTask, ['m', 'p']));
 
 
 
+
+
+
+console.clear();
+
+const lettersDown = (array) => {
+
+    array.forEach((value) => {
+        if (value === value.toUpperCase()) {
+            value === value.toLowerCase();
+        }
+
+        value === value.toUpperCase();
+    })
+
+
+}
+
+console.log(lettersDown(['a', 'F', 'g']));
+
+
+
+
+
+
