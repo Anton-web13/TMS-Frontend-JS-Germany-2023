@@ -300,9 +300,13 @@ const usersListTask = ['Alex', 'Max', 'Vika', 'Anton', 'Petr', 'Alexandra'];
 
 const findUserTask = (users, letters) => {
 
+    const lettersLowerCase = letters.map((letter) => {
+        return letter.toLowerCase();
+    });
+
     return users.filter((user) => {
         const firstLetter = user[0].toLowerCase();
-        console.log(firstLetter);
+        // console.log(firstLetter);
 
         // letters.forEach((letter) => {
         //     if (!letters === letter) {
@@ -310,14 +314,48 @@ const findUserTask = (users, letters) => {
         //     }
         // });
 
-        if (!letters.includes(firstLetter)) {
-            return user;
-        }
+        // if (!letters.includes(firstLetter)) {
+        //     return user;
+        // }
+        //
+        // return !letters.includes(firstLetter);
+
+        const isLetter = lettersLowerCase.findIndex((letter) => {
+            return letter === firstLetter
+        }) == -1;
+
+        return isLetter;
 
     })
 }
 
-console.log(findUserTask(usersListTask, ['m', 'p']));
+// console.log(findUserTask(usersListTask, ['M', 'p']));
+
+
+// for
+
+const findUserFor = (users, blackList) => {
+
+    const result = [];
+    const lowerCaseBlackList = [];
+    for (let i = 0; i < blackList.length; i++) {
+        const letter = blackList[i].toLowerCase();
+        lowerCaseBlackList.push(letter);
+    }
+
+    for (let i = 0; i < users.length; i ++) {
+        const firstLetterUser = users[i][0].toLowerCase();
+
+        if (!lowerCaseBlackList.includes(firstLetterUser)) {
+            result.push(users[i]);
+        }
+    }
+
+    return result;
+
+}
+
+// console.log(findUserFor(usersListTask, ['M', 'p']))
 
 
 
@@ -325,37 +363,48 @@ console.log(findUserTask(usersListTask, ['m', 'p']));
 
 
 
-console.clear();
+// console.clear();
 
 // 1
 const lettersDown = (array) => {
 
-    const result = [];
+    // const result = [];
+    //
+    // array.forEach((value) => {
+    //    if (value === value.toUpperCase()) {
+    //        newValue = value.toLowerCase();
+    //    } else {
+    //        newValue = value.toUpperCase();
+    //    }
+    //
+    //    result.push(newValue);
+    //
+    //
+    // })
+    //
+    // return result;
 
-    array.forEach((value) => {
-       if (value === value.toUpperCase()) {
-           newValue = value.toLowerCase();
-       } else {
-           newValue = value.toUpperCase();
-       }
+    if (!Array.isArray(array)) return;
 
-       result.push(newValue);
+    return array.map((letter) => {
+      if (letter === letter.toLowerCase()) {
+          return letter.toUpperCase();
+      }
 
-
+      return letter.toLowerCase();
     })
-
-    return result;
 
 
 }
 
-console.log(lettersDown(['a', 'F', 'g','D', 'J', 'H']));
+// console.log(lettersDown(['a', 'F', 'g','D', 'J', 'H']));
 
 
 
 
 
-console.clear();
+
+// console.clear();
 // 2
 
 
@@ -377,23 +426,93 @@ const arrayOfNumbers = (numbers) => {
     return result;
 }
 
-console.log(arrayOfNumbers([3,4,6]));
+// console.log(arrayOfNumbers([3,4,6]));
 
 
 
 
-console.clear();
+const getDetailedInfo = (numbers) => {
+    if (!Array.isArray(numbers)) return;
+
+    return numbers.map((number, index) => {
+        return `Value: ${number}, Index: ${index}, Squared: ${number * number}`
+    })
+}
+
+// console.log(getDetailedInfo([3,4,6]));
+
+
+
+
+const getDetailedInfoForOf = (numbers) => {
+    if (!Array.isArray(numbers)) return;
+
+    const result = [];
+
+    let index = 0;
+
+    for (const number of numbers) {
+        result.push(
+            `Value: ${number}; index ${index++}; Squared: ${number ** 2}`
+        )
+    }
+
+    return result;
+
+
+}
+
+// console.log(getDetailedInfoForOf([3,4,6,8]));
+
+
+
+const getDetailedInfoWhile = (numbers) => {
+    if (!Array.isArray(numbers)) return;
+
+    const result = [];
+
+    let i = 0;
+
+    while (i < numbers.length) {
+        const number = numbers[i];
+
+        result.push(
+            `Value: ${number}; index ${i++}; Squared: ${number ** 2}`
+        )
+    }
+
+    return result;
+}
+
+// console.log(getDetailedInfoWhile([3,4,6,8]));
+
+
+// console.clear();
 // 3
 
-const lettersNumbers = (value) => {
+const lettersNumbers = (data) => {
 
     // const onlyLetters = [];
 
-    return value.filter((value) => {
-        if (typeof value !== "string") {
-            // return onlyLetters.push(value);
-            return value;
-        }
+    // return data.filter((item) => {
+    //     if (typeof item !== "string") {
+    //         // return onlyLetters.push(value);
+    //         return item;
+    //     }
+    // })
+
+
+    return data.filter((item) =>{
+        // console.log(item);
+
+        // const isString = typeof item === 'string';
+
+        // return isString && item.length === 2;
+        // if (typeof item === 'string' && item.length === 2) {
+        //     return item;
+        // }
+
+        return typeof item === 'string' && item.length === 2;
     })
 
     // return numbers.filter((number) => {
@@ -401,10 +520,19 @@ const lettersNumbers = (value) => {
     // });
 
     // return onlyLetters;
+    //
+    // return value.map((word) => {
+    //
+    //     const wordToString = word.toString();
+    //
+    //     if (wordToString.length === 2) {
+    //         return word;
+    //     }
+    // })
 
 }
 
-console.log(lettersNumbers(["Hi", 2, 3, 4, 5, "JS", 2, "C++"]));
+console.log(lettersNumbers(["Hi", 2, 3, 4, 5, "JS", 2, "C++", [1,2]]));
 
 
 
