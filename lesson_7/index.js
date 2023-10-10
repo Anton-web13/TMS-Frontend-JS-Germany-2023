@@ -290,7 +290,226 @@ const getReverseSomeData = (data) => {
     // return result;
 };
 
-console.log(getReverseSomeData(someData));
+// console.log(getReverseSomeData(someData));
+
+
+
+// Home works
+// Task 1
+const numbersMap = [1,2,3,4,5,6];
+
+const getOthersNumbers = (numbers) => {
+    return numbers.map((number) => {
+        if (number % 2 === 0) {
+             return ++number;
+        }
+
+        return --number;
+    });
+};
+
+// console.log(getOthersNumbers(numbersMap));
+
+
+// Task 2
+const wrongWords = ['hello', 'wOrLd'];
+
+const getCorrectWords = (words) => {
+    const getLowersCaseWords = words.map((word) => {
+        return word.toLowerCase();
+    })
+
+     return getLowersCaseWords.map((word) => {
+         return word[0].toUpperCase() + word.slice(1).toLowerCase();
+     })
+};
+
+// console.log(getCorrectWords(wrongWords));
+
+
+
+// Task 3
+const usersToDelete = [
+    {
+        id: 1,
+        name: 'Alex',
+    },
+    {
+        id: 2,
+        name: 'Tomara',
+    },
+    {
+        id: 3,
+        name: 'Max',
+    }
+];
+
+const usersId = [2,3];
+
+
+const removeUsers = (usersToDelete, usersId) => {
+    // const usersReduce = usersToDelete.reduce((result, {id, name}) => {
+    //     result[id] = name;
+    //     return result;
+    // }, {});
+    //
+    // return {
+    //     usersReduce,
+    //     usersId
+    // }
+
+    // const alleIds = usersToDelete.map((user) => {
+    //
+    //     const idOfUsers = user.id;
+    //
+    //     if (!usersId.includes(idOfUsers)) {
+    //         return user;
+    //     }
+    // })
+    //
+    // return alleIds;
+
+    return usersToDelete.reduce((result, user) => {
+        if (!usersId.includes(user.id)) {
+            result.push(user);
+        }
+
+        return result;
+    }, [])
+};
+
+// console.log(removeUsers(usersToDelete, usersId));
+
+
+// Task 4
+const string = 'Привет';
+
+const getPalindromString = (string) => {
+    const reverseString = string.split('').reverse().join('');
+
+    if (reverseString === string) {
+        return true;
+    }
+
+    return false;
+};
+
+// console.log(getPalindromString(string));
+
+
+// Task 5
+const usersPeople = [
+    {
+        id: 1,
+        first_name: 'Jeanette',
+        last_name: 'Penddreth',
+        email: 'jpenddreth0@census.gov',
+        gender: 'Female',
+        ip_address: '26.58.193.2',
+    },
+    {
+        id: 2,
+        first_name: 'Petr',
+        last_name: 'Jackson',
+        email: 'gfrediani1@senate.gov',
+        gender: 'Male',
+        ip_address: '229.179.4.212',
+    },
+    {
+        id: 3,
+        first_name: 'Alex',
+        last_name: 'Jackson',
+        email: 'gfrediani1@senate.gov',
+        gender: 'Male',
+        ip_address: '229.179.4.212',
+    },
+];
+
+
+const getMenOrWomen = (usersPeople) => {
+    const men = [];
+    const women = [];
+
+    usersPeople.forEach(({id, email, gender, ip_address, first_name, last_name}) => {
+        const fullName = `${first_name} ${last_name}`;
+        if (gender === 'Male') {
+            men.push({id, fullName, email, gender, ip_address});
+        } else {
+            women.push({id, fullName, email, gender, ip_address});
+        }
+    })
+
+    return {
+        men,
+        women
+    };
+};
+
+// console.log(getMenOrWomen(usersPeople));
+
+
+
+// Task 6
+const newReleases = [
+    {
+        id: 2345324532,
+        title: "Die Hard",
+        boxart: "https://developer.mozilla.org/en-U",
+        uri: "https:t/Reference/Global_Objects/Array/reverse?retiredLocale=de",
+        rating: [4.0],
+        bookmark: [],
+    },
+    {
+        id: 44444444444444,
+        title: "Planet",
+        boxart: "https://developer.mozilla.org/en-U",
+        uri: "https:t/Reference/Global_Objects/Array/reverse?retiredLocale=de",
+        rating: [5.0],
+        bookmark: [{id: 34523452, time: 234523452}],
+    },
+    {
+        id: 222222222222222,
+        title: "World",
+        boxart: "https://developer.mozilla.org/en-U",
+        uri: "https:t/Reference/Global_Objects/Array/reverse?retiredLocale=de",
+        rating: [4.0],
+        bookmark: [],
+    },
+    {
+        id: 675465,
+        title: "Autos",
+        boxart: "https://developer.mozilla.org/en-U",
+        uri: "https:t/Reference/Global_Objects/Array/reverse?retiredLocale=de",
+        rating: [5.0],
+        bookmark: [{id: 34523452, time: 234523452}],
+    }
+];
+
+const getNewRealeses = (releases) => {
+    return releases.map(({id, title}) => ({id, title}));
+};
+
+// console.log(getNewRealeses(newReleases));
+
+
+
+// Task 7
+const getIds = (releases) => {
+    return releases.reduce((result, {id, rating}) => {
+        const newRating = rating[0];
+
+        if (newRating === 5) {
+            result.push(id);
+        }
+
+        return result;
+    }, []);
+};
+
+console.log(getIds(newReleases));
+
+
+
 
 
 
