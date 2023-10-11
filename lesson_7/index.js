@@ -312,14 +312,10 @@ const getOthersNumbers = (numbers) => {
 
 
 // Task 2
-const wrongWords = ['hello', 'wOrLd'];
+const wrongWords = ['helLo', 'wOrLd'];
 
 const getCorrectWords = (words) => {
-    const getLowersCaseWords = words.map((word) => {
-        return word.toLowerCase();
-    })
-
-     return getLowersCaseWords.map((word) => {
+     return words.map((word) => {
          return word[0].toUpperCase() + word.slice(1).toLowerCase();
      })
 };
@@ -369,13 +365,17 @@ const removeUsers = (usersToDelete, usersId) => {
     //
     // return alleIds;
 
-    return usersToDelete.reduce((result, user) => {
-        if (!usersId.includes(user.id)) {
-            result.push(user);
-        }
+    return usersToDelete.filter(({id}) => {
+        return !usersId.includes(id);
+    });
 
-        return result;
-    }, [])
+    // return usersToDelete.reduce((result, user) => {
+    //     if (!usersId.includes(user.id)) {
+    //         result.push(user);
+    //     }
+    //
+    //     return result;
+    // }, [])
 };
 
 // console.log(removeUsers(usersToDelete, usersId));
@@ -423,26 +423,97 @@ const usersPeople = [
         gender: 'Male',
         ip_address: '229.179.4.212',
     },
+    {
+        id: 4,
+        first_name: 'Alex',
+        last_name: 'Jackson',
+        email: 'gfrediani1@senate.gov',
+        gender: 'StrangeMen',
+        ip_address: '229.179.4.212',
+    },
+    {
+        id: 5,
+        first_name: 'Alex',
+        last_name: 'Jackson',
+        email: 'gfrediani1@senate.gov',
+        // gender: 'Supernatural',
+        ip_address: '229.179.4.212',
+    },
 ];
+
+// const WOMEN = 'Female';
+//
+// const separateByGender = (result, {first_name, last_name, ...otherInfo}) => {
+//     const isWomen = otherInfo.gender === WOMEN;
+//     const isGender = isWomen ? 'women' : 'men';
+//
+//     const userToPush = {
+//         ...otherInfo,
+//         fullName: `${first_name} ${last_name}`,
+//     }
+//
+//     // if (isWomen) {
+//     //     result.women.push(userToPush);
+//     // } else {
+//     //     result.men.push(userToPush);
+//     // }
+//
+//     result[isGender].push(userToPush);
+//
+//     return result;
+//
+// }
+//
+// const getMenOrWomen = (usersPeople) => {
+//     // const men = [];
+//     // const women = [];
+//     //
+//     // usersPeople.forEach(({id, email, gender, ip_address, first_name, last_name}) => {
+//     //     const fullName = `${first_name} ${last_name}`;
+//     //     if (gender === 'Male') {
+//     //         men.push({id, fullName, email, gender, ip_address});
+//     //     } else {
+//     //         women.push({id, fullName, email, gender, ip_address});
+//     //     }
+//     // })
+//     //
+//     // return {
+//     //     men,
+//     //     women
+//     // };
+//
+//
+//     return usersPeople.reduce(separateByGender, { men: [], women: []});
+// };
+//
+// console.log(getMenOrWomen(usersPeople));
+
+
+
+// other variante
+
 
 
 const getMenOrWomen = (usersPeople) => {
-    const men = [];
-    const women = [];
+    return usersPeople.reduce((result, {first_name, last_name, ...otherInfo}) => {
+        const gender = otherInfo.gender || 'Others people';
 
-    usersPeople.forEach(({id, email, gender, ip_address, first_name, last_name}) => {
-        const fullName = `${first_name} ${last_name}`;
-        if (gender === 'Male') {
-            men.push({id, fullName, email, gender, ip_address});
-        } else {
-            women.push({id, fullName, email, gender, ip_address});
+        const userToPush = {
+            ...otherInfo,
+            fullName: `${first_name} ${last_name}`,
         }
-    })
 
-    return {
-        men,
-        women
-    };
+        if (!result[gender]) {
+            result[gender] = [];
+        } else {
+            result[gender] = [];
+        }
+
+        result[gender].push(userToPush);
+
+        return result;
+
+    }, {});
 };
 
 // console.log(getMenOrWomen(usersPeople));
@@ -496,7 +567,7 @@ const getNewRealeses = (releases) => {
 // Task 7
 const getIds = (releases) => {
     return releases.reduce((result, {id, rating}) => {
-        const newRating = rating[0];
+        const [newRating] = rating;
 
         if (newRating === 5) {
             result.push(id);
@@ -507,6 +578,10 @@ const getIds = (releases) => {
 };
 
 console.log(getIds(newReleases));
+
+
+
+
 
 
 
