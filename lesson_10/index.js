@@ -187,9 +187,99 @@ const getFactorialСycle = (number) => {
 
 
 
-const getFactorialRecursion = () => {
+// const getFactorialRecursion = () => {
+//
+// }
 
-}
+
+
+
+
+
+// Home tasks
+// 1 Task
+const someWords = "camelCasing'";
+
+const getWordsWithSpace = (word) => {
+    let newWord = []
+    word.split('').forEach((letter) => {
+        if (letter !== letter.toUpperCase()) {
+            newWord.push(letter);
+        } else if (letter === letter.toUpperCase()) {
+            newWord.push(" ");
+            newWord.push(letter);
+        }
+    })
+
+    return newWord.join("");
+};
+
+// console.log(getWordsWithSpace(someWords));
+
+
+
+
+
+// 2 Task
+const numbersProgression = [1, 3, 5, 9, 11];
+
+const findMissing = () => {
+    let newNumbers = [];
+
+    for (let i = 1; i <= 11; i++) {
+        if (i % 2 !== 0 || numbersProgression.includes(i)) {
+            newNumbers.push(i);
+        }
+    }
+
+    return newNumbers.filter((number) => {
+        if (!numbersProgression.includes(number)) {
+            return number;
+        }
+    });
+};
+
+// console.log(findMissing());
+
+// const now = performance.now();
+//
+// findMissing();
+//
+// const end = performance.now();
+//
+// console.log(`${end - now}ms`);
+
+
+
+
+// 3 Task
+const symbol = ['I', 'V', 'X', 'L', 'C', 'D', 'M'];
+
+const value = [1,5,10,50,100,500,1000];
+
+const getNumeral = (symbol, value, datum) => {
+
+
+    const newMap = new Map();
+
+    newMap.set(symbol, value);
+
+    console.log(newMap);
+
+    console.log(Object.entries(newMap));
+
+    // console.log(newMap.);
+
+};
+
+console.log(getNumeral(symbol, value, "MM"));
+
+
+
+
+
+
+
 
 
 
