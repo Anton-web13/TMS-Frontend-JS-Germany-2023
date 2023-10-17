@@ -221,7 +221,7 @@ const getWordsWithSpace = (word) => {
 
 
 // 2 Task
-const numbersProgression = [1, 3, 5, 9, 11];
+const numbersProgression = [1, 11];
 
 const findMissing = () => {
     let newNumbers = [];
@@ -251,6 +251,23 @@ const findMissing = () => {
 
 
 
+const findMissingNumber = (numbers) => {
+    for (let i = 0; i < numbers.length; i++) {
+        const currentNumber = numbers[i];
+        const nextNumber = numbers[i + 1];
+        const numberAfterNextNumber = numbers[i + 2];
+
+        const currentDifference = nextNumber - currentNumber;
+        const nextDifference = numberAfterNextNumber - nextNumber;
+
+        if (currentDifference !== nextDifference) {
+            return currentNumber + nextDifference;
+        }
+    }
+};
+
+// console.log(findMissingNumber([2, 6, 18]));
+
 
 // 3 Task
 const symbol = ['I', 'V', 'X', 'L', 'C', 'D', 'M'];
@@ -272,7 +289,82 @@ const getNumeral = (symbol, value, datum) => {
 
 };
 
-console.log(getNumeral(symbol, value, "MM"));
+// console.log(getNumeral(symbol, value, "MM"));
+
+
+const convertRomainNumbers = (romanianNumber) => {
+    const RomainNumbersMap = {
+        I: 1,
+        V: 5,
+        X: 10,
+        L: 50,
+        C: 100,
+        D: 500,
+        M: 1000
+    };
+
+    let result = 0;
+
+    for (let i = 0; i < romanianNumber.length; i++) {
+
+        const currentSymbol = romanianNumber[i];
+        const nextSymbol = romanianNumber[i + 1];
+
+        const currentValue = RomainNumbersMap[currentSymbol];
+        const nextValue =  RomainNumbersMap[nextSymbol];
+
+        console.log("Current", currentValue, nextValue)
+
+        if (currentValue < nextValue) {
+            result -= currentValue;
+        } else {
+            result += currentValue;
+        }
+    }
+
+    console.log("Result", result);
+
+    return result;
+};
+
+// console.log(convertRomainNumbers('XIX'));
+
+
+// 4 Task
+const findClovesPairs = (gloves) => {
+    const GlovesAmountMap = new Map();
+
+    gloves.forEach((glove) => {
+       if (GlovesAmountMap.has(glove)) {
+           GlovesAmountMap.set(glove, GlovesAmountMap.get(glove) + 1);
+       } else {
+           GlovesAmountMap.set(glove, 1);
+       }
+    });
+
+
+
+    return Array.from(GlovesAmountMap).reduce((result, [_, amount]) => {
+        return result + Math.floor(amount / 2);
+    }, 0);
+
+};
+
+// console.log(findClovesPairs(['red', 'red', 'red', 'green', 'green']));
+
+
+
+// 5 Task
+const findFactorial = (number) => {
+    if (number === 0) {
+        return 1;
+    }
+
+    return number * findFactorial(number - 1);
+};
+
+console.log(findFactorial(5));
+
 
 
 
