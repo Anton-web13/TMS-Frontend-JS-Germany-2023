@@ -125,7 +125,7 @@ const getPokemnts = async () => {
         const details = await fetch(response.results[0].url)
             .then(response => response.json())
             .then(data => {
-                return data.game_indices;
+                return data.game_indices ;
             })
 
         return details;
@@ -136,7 +136,7 @@ const getPokemnts = async () => {
 };
 
 getPokemnts().then(result => {
-    console.log(result);
+    // console.log(result);
 });
 
 
@@ -152,3 +152,35 @@ getPokemnts().then(result => {
 // };
 //
 // getPokemnts1();
+
+console.log("Script Start (Synchron)");
+
+const promise = new Promise((resolve) => {
+    console.log('Promise Declaration (Synchron)');
+
+    resolve();
+});
+
+setTimeout(() => {
+    console.log('Timeout (Macro)')
+}, 0);
+
+promise.then(() => {
+    console.log('Promise Execution (Micro)');
+})
+
+console.log("Script End (Synchron)");
+
+const fn = async () => {
+    // const data = await fetch("");
+    const data = await promise.then(() => 2)
+    console.log('Async Declaration (Synchron-Await)');
+    return 1;
+}
+
+fn().then(() => {
+    console.log('Async Execution (Micro)');
+});
+
+
+
