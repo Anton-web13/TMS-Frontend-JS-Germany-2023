@@ -308,18 +308,26 @@ const getAllPokemons = async () => {
         // }
         //
 
-        await Promise.all(
-            results.map((result) => {
-                return fetch(`${result.url}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        allPokemon.push(data)
-                    })
+        // console.log(results)
 
-            })
-        )
+        const pokemonDetailsRequest = results.map(({url}) => {
+            return fetch(url).then(response => response.json()); // Wir haben einen Array von Promises gemacht.
+        })
 
-        console.log(allPokemon);
+        const result = await Promise.all(pokemonDetailsRequest);
+
+        console.log(result);
+
+        // await Promise.all(
+        //     results.map((result) => {
+        //         return fetch(`${result.url}`)
+        //             .then(response => response.json())
+        //             .then(data => {
+        //                 allPokemon.push(data)
+        //             })
+        //
+        //     })
+        // )
 
     } catch (e) {
         console.log(e.message);
@@ -327,7 +335,7 @@ const getAllPokemons = async () => {
 
 };
 
-const result = getAllPokemons();
+getAllPokemons();
 
 
 //     .then(result => {
