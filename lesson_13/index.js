@@ -160,8 +160,203 @@ const getTextId = (users, comments) => {
     });
 };
 
-
 console.log(getTextId(users, comments));
+console.clear();
+
+
+
+
+
+
+
+
+
+const createFakeRequest = (response, delay, isFailed = false) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (isFailed) {
+                reject(new Error('LoL Failed'));
+            }
+            resolve(response);
+        }, delay);
+    });
+};
+
+const getPokemon = (id) => {
+    return fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+        .then(response => response.json());
+};
+
+const loadDate = async () => {
+    // const pokemon = await createFakeRequest(
+    //     {name: 'Pikachu', ability: 'Power Shot'},
+    //     5000); // 1m
+    // const weather = await createFakeRequest(
+    //     {weather: 'Sunday', temperature: '20 deg'},
+    //     5000); // 1m
+    // const userProfileData = await createFakeRequest(
+    //     {id: 'xdfgsrg', name: 'Alex', age: 25},
+    //     5000); // 1m
+
+    // console.log({
+    //     pokemon,
+    //     weather,
+    //     userProfileData,
+    // })
+
+    try {
+
+        // all
+
+        // const [pokemon, weather, userProfileData] = await Promise.all(
+        //     [
+        //         createFakeRequest(
+        //             {name: 'Pikachu', ability: 'Power Shot'},
+        //             1000),
+        //         createFakeRequest(
+        //             {weather: 'Sunday', temperature: '20 deg'},
+        //             3000, true),
+        //         createFakeRequest(
+        //             {id: 'xdfgsrg', name: 'Alex', age: 25},
+        //             2000),
+        //     ]
+        // )
+        // console.log({pokemon, weather, userProfileData})
+
+
+        // allSettled
+
+        // const [pokemon, weather, userProfileData] = await Promise.allSettled(
+        //     [
+        //         createFakeRequest(
+        //             {name: 'Pikachu', ability: 'Power Shot'},
+        //             1000),
+        //         createFakeRequest(
+        //             {weather: 'Sunday', temperature: '20 deg'},
+        //             3000, true),
+        //         createFakeRequest(
+        //             {id: 'xdfgsrg', name: 'Alex', age: 25},
+        //             2000),
+        //     ]
+        // )
+        // console.log({pokemon, weather, userProfileData})
+
+
+        // race
+
+        // const result = await Promise.race(
+        //     [
+        //        // getPokemon(1),
+        //        // getPokemon(2),
+        //        // getPokemon(3),
+        //
+        //         createFakeRequest(
+        //             {name: 'Pikachu', ability: 'Power Shot'},
+        //             1000),
+        //         createFakeRequest(
+        //             {weather: 'Sunday', temperature: '20 deg'},
+        //             3000, true),
+        //         createFakeRequest(
+        //             {id: 'xdfgsrg', name: 'Alex', age: 25},
+        //             2000),
+        //     ]
+        // )
+
+
+
+        // any
+
+        const result = await Promise.any(
+            [
+                // getPokemon(1),
+                // getPokemon(2),
+                // getPokemon(3),
+
+                createFakeRequest(
+                    {name: 'Pikachu', ability: 'Power Shot'},
+                    3000),
+                createFakeRequest(
+                    {weather: 'Sunday', temperature: '20 deg'},
+                    2000),
+                createFakeRequest(
+                    {id: 'xdfgsrg', name: 'Alex', age: 25},
+                    1000, true),
+            ]
+        )
+        console.log(result)
+
+    } catch (e) {
+        console.log(e.message);
+    }
+
+};
+
+// loadDate();
+
+
+
+const getAllPokemons = async () => {
+    try {
+        const allPokemon = [];
+        const {results} = await fetch(`https://pokeapi.co/api/v2/pokemon/`)
+            .then(response => response.json());
+
+        // for (let {url} of results) {
+        //     const details = await fetch(`${url}`)
+        //         .then(respose => respose.json())
+        //     allPokemon.push(details)
+        // }
+        //
+
+        await Promise.all(
+            results.map((result) => {
+                return fetch(`${result.url}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        allPokemon.push(data)
+                    })
+
+            })
+        )
+
+        console.log(allPokemon);
+
+    } catch (e) {
+        console.log(e.message);
+    }
+
+};
+
+const result = getAllPokemons();
+
+
+//     .then(result => {
+//         const allPokemon = [];
+//
+//         try {
+//
+//             for (let i = 1; i <= result.length; i++ ) {
+//                 fetch(`${result[i]}`)
+//                     .then(response => response.json())
+//                     .then(data => {
+//                         allPokemon.push(data);
+//                     })
+//             }
+//
+//             console.log(allPokemon);
+//         } catch (e) {
+//             console.log(e.message);
+//         }
+//
+//     });
+
+
+
+
+
+
+
+
 
 
 
