@@ -80,5 +80,89 @@ const sayArguments = function() {
     console.log(arguments)
 };
 
-sayArguments(1,2,3)
+// sayArguments(1,2,3)
+
+
+
+
+const comments = [
+    {
+        id: 1,
+        text: 'First Comment',
+    },
+    {
+        id: 2,
+        text: 'Second Comment',
+    }
+];
+
+const users = [
+    {
+        id: 'srdfsergw34',
+        commentId: 2,
+        name: 'John Doe',
+        email: 'sdfrgsdrgs@doe.com',
+    },
+    {
+        id: 'srdfsergw34',
+        commentId: 1,
+        name: 'Alex Petrov',
+        email: 'petrov@gmail.com',
+    }
+];
+
+
+// Variante 1
+// const getTextId = (users, comments) => {
+//     const commentsMap = new Map();
+//
+//     comments.forEach(comment => {
+//         commentsMap.set(comment.id, comment);
+//     });
+//
+//     // console.log(commentsMap);
+//
+//     // return users.reduce((result, user) => {
+//     //     result.push(
+//     //         {
+//     //             ...user,
+//     //             text: commentsMap.get(user.commentId),
+//     //         }
+//     //     )
+//     //     return result;
+//     //
+//     // }, [])
+//
+//
+//     return users.map((user) => {
+//         return {
+//             ...user,
+//             text: commentsMap.get(user.commentId).text,
+//         }
+//     });
+// };
+
+
+// Variante 2
+const getTextId = (users, comments) => {
+    const commentsReduce = comments.reduce((result, comment) => {
+        result[comment.id] = comment;
+
+        return result;
+    }, {})
+
+
+    return users.map((user) => {
+        return {
+            ...user,
+            text: commentsReduce[user.commentId].text,
+        }
+    });
+};
+
+
+console.log(getTextId(users, comments));
+
+
+
 
