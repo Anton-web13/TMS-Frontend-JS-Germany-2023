@@ -1,0 +1,20 @@
+.greetings {
+    padding: 20px;
+    border-radius: 10px;
+    background: red;
+    color: #fff;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.greetingsNew {
+    padding: 20px;
+    border-radius: 10px;
+    background: red;
+    color: #fff;
+    text-align: center;
+    border: 1px solid black;
+}
+.backgroundColor {
+    background-color: orange;
+}

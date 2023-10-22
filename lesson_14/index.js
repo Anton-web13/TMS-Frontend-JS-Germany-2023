@@ -125,8 +125,35 @@ const getOddNumbers = (numbers) => {
 
 };
 
-console.log(getOddNumbers(numbers));
+// console.log(getOddNumbers(numbers));
 
+
+
+
+// HTML
+// addEventListener('DOMContentLoaded', (event) => {
+//     const greetingsBlock = document.getElementById('identificator');
+//
+//     console.log(greetingsBlock);
+// })
+
+const greetingsBlock = document.getElementById('identificator');
+const greetingsBlockClass = document.getElementsByClassName('greetings');
+const greetingsBlockTag = document.getElementsByTagName('div');
+
+
+const greetingsBlockSelectorAll = document.querySelectorAll('div p');
+const greetingsBlockSelector = document.querySelector('.greetingsNew');
+
+// for (const item of greetingsBlockSelector) {
+//     // console.log(item);
+// }
+// console.log(greetingsBlockSelector);
+
+// greetingsBlockSelector.style.backgroundColor = 'blue';
+
+greetingsBlockSelector.classList.add('backgroundColor');
+greetingsBlockSelector.classList.remove('backgroundColor');
 
 
 
