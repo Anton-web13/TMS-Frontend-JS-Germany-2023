@@ -137,13 +137,13 @@ const getOddNumbers = (numbers) => {
 //     console.log(greetingsBlock);
 // })
 
-const greetingsBlock = document.getElementById('identificator');
-const greetingsBlockClass = document.getElementsByClassName('greetings');
-const greetingsBlockTag = document.getElementsByTagName('div');
-
-
-const greetingsBlockSelectorAll = document.querySelectorAll('div p');
-const greetingsBlockSelector = document.querySelector('.greetingsNew');
+// const greetingsBlock = document.getElementById('identificator');
+// const greetingsBlockClass = document.getElementsByClassName('greetings');
+// const greetingsBlockTag = document.getElementsByTagName('div');
+//
+//
+// const greetingsBlockSelectorAll = document.querySelectorAll('div p');
+// const greetingsBlockSelector = document.querySelector('.greetingsNew');
 
 // for (const item of greetingsBlockSelector) {
 //     // console.log(item);
@@ -152,8 +152,131 @@ const greetingsBlockSelector = document.querySelector('.greetingsNew');
 
 // greetingsBlockSelector.style.backgroundColor = 'blue';
 
-greetingsBlockSelector.classList.add('backgroundColor');
-greetingsBlockSelector.classList.remove('backgroundColor');
+// greetingsBlockSelector.classList.add('backgroundColor');
+// greetingsBlockSelector.classList.remove('backgroundColor');
+
+
+console.clear();
+
+// Task 1
+const chuck = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+const newArray = [];
+const getSizeArray = (chuck, size) => {
+    if (chuck.length >= size) {
+        const threeElements = chuck.splice(0, size);
+        newArray.push(threeElements);
+        getSizeArray(chuck, size);
+    } else if (chuck.length < size && chuck.length !== 0) {
+        newArray.push(chuck);
+    }
+
+    return newArray;
+};
+
+// console.log(getSizeArray(chuck, 4));
+
+
+
+// Task 2
+
+const URLPosts = 'https://jsonplaceholder.typicode.com/posts/';
+const URLUsers = 'https://jsonplaceholder.typicode.com/users';
+
+// const URL = [URLPosts, URLUsers]
+//
+// const getPosts = async () => {
+//     try {
+//         const getPromise = URL.map((url) => {
+//             return fetch(url).then(response => response.json());
+//         })
+//
+//         const promise = await Promise.all(getPromise)
+//
+//         // console.log(promise[0])
+//
+//         const posts = promise[0];
+//         const users = promise[1];
+//
+//         // console.log(users.length)
+//
+//         const newPostArray = []
+//
+//         const newMapIds = new Map();
+//         const newMapTitles = new Map();
+//         const allTitleFromUser = [];
+//
+//         for (const post of posts) {
+//             newMapIds.set(post.userId, post.userId);
+//
+//             if (post.userId === newMapIds.get(post.userId)) {
+//                 newMapTitles.set(newMapIds.get(post.userId), post.title)
+//             }
+//             // newMap.set(post.userId, allTitleFromUser);
+//         }
+//
+//         // console.log(Object.entries(newMapTitles));
+//         console.log(newMapTitles);
+//         //
+//         // const responseUser = users.reduce((result, {name, ...rest}) => {
+//         //         result.push({
+//         //             name,
+//         //             rest,
+//         //             title: newMap.get(rest.id),
+//         //         })
+//         //
+//         //     return result;
+//         // }, []);
+//         //
+//         // console.log(responseUser)
+//
+//     } catch (e) {
+//         console.log(e);
+//     }
+// };
+//
+// getPosts();
+
+const BASE_URL = 'https://jsonplaceholder.typicode.com'
+
+const aggregateUsersPosts = async () => {
+    try {
+        const [users, posts] =  await Promise.all([
+            fetch(`${BASE_URL}/users`).then(response => response.json()),
+            fetch(`${BASE_URL}/posts`).then(response => response.json()),
+        ]);
+
+        const UserIdPostMap = new Map();
+
+        posts.forEach((post) => {
+            if (!UserIdPostMap.has(post.userId)) {
+                UserIdPostMap.set(post.userId, []);
+            }
+
+            UserIdPostMap.get(post.userId).push(post);
+        })
+
+
+        return users.map((user) => {
+            return {
+                ...user,
+                myPost: UserIdPostMap.get(user.id),
+            }
+        });
+
+    } catch (e) {
+        console.log(e)
+    } finally {
+        console.log('Completed!')
+    }
+};
+
+
+(async () => {
+   const data = await aggregateUsersPosts();
+
+    console.log(data);
+})()
+
 
 
 
