@@ -70,16 +70,153 @@ function UserClasses(name, age) {
     this.age = age;
 };
 
-class ClassUser {
-    constructor(name, age) {
-        this.name = name;
-        this.age = age;
+// class ClassUser {
+//     constructor(name, age) {
+//         this.name = name;
+//         this.age = age;
+//     }
+// };
+
+// class Animal {
+//     eats = true;
+//     breath = true;
+//     see = true;
+// };
+
+class Animal {
+    eats = true;
+    breath = true;
+    see = true;
+
+    constructor(isDangerous) {
+        this.isDangerous = isDangerous;
     }
 };
 
-const classUser = new ClassUser('alex', 25);
+class Dog extends Animal {
+    // constructor({eats, breath, see}, {name, age}) {
+    constructor({name, age, isDangerous}) {
+        // super(eats, breath, see);
+        super(isDangerous);
 
-console.log(classUser)
+        this.name = name;
+        this.age = age;
+    }
+}
+
+class Corgi extends Dog {
+    constructor({color, ...rest}) {
+        super({...rest});
+
+        this.color = color;
+    }
+
+}
+
+const myDog = new Corgi({
+        color: 'orange',
+        name: 'Foxy',
+        age: 1,
+        isDangerous: true
+    });
+
+console.log(myDog);
+
+
+
+
+class PokemonService {
+    // baseUrl = 'https://pokeapi.co/api/v2/';
+    static baseUrl = 'https://pokeapi.co/api/v2/';
+
+    static async getAllPokemons() {
+        try {
+           return await fetch(`${this.baseUrl}/pokemon`)
+               .then(response => response.json());
+        } catch(e){}
+    }
+
+    // async getPokemonByName(name) {
+    //     try {
+    //         return await fetch(`${this.baseUrl}/pokemon/${name}`)
+    //             .then(response => response.json());
+    //     } catch(e){}
+    // }
+
+    static async getPokemonByName(name) {
+        try {
+            return await fetch(`${this.baseUrl}/pokemon/${name}`)
+                .then(response => response.json());
+        } catch(e){}
+    }
+
+    static sayHello() {
+        console.log('Hello')
+    }
+}
+
+// const instance = new PokemonService(); // this is instance
+//
+// instance.getAllPokemons().then(data => {
+//     console.log(data);
+// });
+
+// PokemonService.getAllPokemons().then(data => {
+//     console.log(data);
+// });
+//
+//
+// class TestExtending extends PokemonService{}
+//
+// TestExtending.sayHello();
+
+
+
+
+
+
+class PokemonService2 {
+    #name = 'Alex';
+
+    sayName() {
+        // console.log(this.#name);
+        console.log(1);
+    }
+}
+
+
+class BlaBla extends PokemonService2 {
+    sayName() {
+        // console.log(2);
+        super.sayName();
+    }
+}
+
+
+// const service = new PokemonService2();
+const service = new BlaBla();
+
+service.sayName();
+
+
+
+class CoffeeMachine {
+    #waterAmount = 0; // hide
+
+    get waterAmount() {
+        return this.#waterAmount;
+    }
+
+    set waterAmount(value) {
+        if (value < 0) throw new Error("Отрицательный уровень воды");
+        this.#waterAmount = value;
+    }
+}
+const machine = new CoffeeMachine();
+
+machine.waterAmount = 100; // set
+
+console. log(machine.waterAmount); // get
 
 
 
