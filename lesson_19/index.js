@@ -136,7 +136,10 @@ const doubleNums = (arr, multiplier) => {
     // return arr.map((number) => number * 2);
 };
 
-console.log(doubleNums(arr, 1));
+// console.log(doubleNums(arr, 1));
+
+
+
 
 
 
